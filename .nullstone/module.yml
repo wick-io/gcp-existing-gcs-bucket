@@ -1,0 +1,14 @@
+org_name: Wick
+name: gcp-existing-gcs-bucket
+friendly_name: Import existing GCS Bucket
+description: Import an existing GCS bucket that was created outside of this module
+category: datastore
+subcategory: ""
+provider_types:
+    - gcp
+platform: gcs
+subplatform: ""
+type: ""
+appCategories: []
+is_public: true
+tool_name: terraform
