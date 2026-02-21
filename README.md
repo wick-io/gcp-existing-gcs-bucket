@@ -8,11 +8,43 @@ A Nullstone datastore module that imports an existing GCS bucket so other Nullst
 - **Externally managed buckets** - Import a GCS bucket created outside of Nullstone (e.g., via console, CLI, or another IaC tool) into your Nullstone workspace.
 - **Shared storage** - Multiple applications need read/write access to the same bucket. Register it once as a datastore, then use `gcp-gcs-access` on each app.
 
+## Usage
+
+### Option A: Connect to a `gcp-gcs-site` app (recommended)
+
+The bucket name is resolved automatically from the site block's outputs.
+
+```yaml
+datastores:
+  wick-cdn-bucket:
+    module: Wick/gcp-existing-gcs-bucket
+    connections:
+      site: wick-cdn
+```
+
+### Option B: Specify bucket name directly
+
+For buckets created outside of Nullstone or not managed by a `gcp-gcs-site` app.
+
+```yaml
+datastores:
+  my-bucket:
+    module: Wick/gcp-existing-gcs-bucket
+    vars:
+      bucket_name: "my-existing-bucket-name"
+```
+
+## Connections
+
+| Name | Contract | Required | Description |
+|------|----------|----------|-------------|
+| `site` | `app/gcp/gcs` | No | A `gcp-gcs-site` app block to resolve the bucket name from |
+
 ## Variables
 
-| Name | Type | Description |
-|------|------|-------------|
-| `bucket_name` | `string` | The name of the existing GCS bucket to import |
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `bucket_name` | `string` | `""` | The name of the existing GCS bucket. When empty, resolved from the connected site block. |
 
 ## Outputs
 

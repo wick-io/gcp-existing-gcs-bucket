@@ -1,7 +1,8 @@
 variable "bucket_name" {
   type        = string
+  default     = ""
   description = <<EOF
 The name of the existing GCS bucket to import.
-The bucket must be in the same project as this Nullstone environment.
+When empty, the bucket name is resolved from the connected site block.
 EOF
 }
